@@ -1,13 +1,18 @@
 import './App.css';
+import { useState } from 'react';
 
 
 function App() {
-  const handleSubmit = () => {
-
+  const [formData, setFormData] = useState({name: '', email: ''});
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form submitted with data:", formData);
   };
 
   const handleChange = (e) => {
-    console.log(e.target.value);
+    setFormData(
+      {...formData, [e.target.name]: e.target.value, } 
+    );
   };
 
   return (
@@ -16,11 +21,18 @@ function App() {
       <form onSubmit={handleSubmit}>
         <label>
           Name :
-          <input type="text" name='name'  onChange={handleChange}/> 
+          <input type="text" name='name' value={formData.name} onChange={handleChange}/> 
         </label>
+        <br />
+        <label>
+          Email :
+          <input type="email" name='email' value={formData.email} onChange={handleChange}/> 
+        </label>
+        <br />
+        <button type="submit">Submit</button>
       </form>
     </div>
   )
 }
 
-export default App
+export default App;
