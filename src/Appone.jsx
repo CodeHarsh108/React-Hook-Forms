@@ -2,7 +2,7 @@ import './App.css';
 import { useState } from 'react';
 
 
-function App() {
+function Appone() {
   const [formData, setFormData] = useState({name: '', email: ''});
   const [errors, setErrors] = useState({});
   const validate = () => {
@@ -56,4 +56,4 @@ function App() {
   )
 }
 
-export default App;
+export default Appone;
