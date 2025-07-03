@@ -3,7 +3,7 @@ import './App.css';
 import { useForm } from 'react-hook-form';
 
 function Apptwo() {
-    const {register, handleSubmit, watch} = useForm();
+    const {register, handleSubmit, watch, formState: {errors}} = useForm();
     const onSubmit = (data) => console.log(data);
     const watchedName = watch('name');
     const watchedEmail = watch('email');
@@ -14,21 +14,23 @@ function Apptwo() {
 
     useEffect(() => {
     console.log('Email changed:', watchedEmail);}, [watchedEmail]);
-    
+
   return (
     <div>
       <h1>Forms in react</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <label>
           Name :
-          <input {...register('name')} />
+          <input {...register('name', {required: true, minLength:2})} />
         </label>
+        {errors.name && <span>Name is required and minimum 2 characters long</span>}
         <br />
         <br />
         <label>
           Email :
-            <input type="email" {...register('email')}/>
+            <input type="email" {...register('email', {required: true})}/>
         </label>
+        {errors.email && <span>Email is required</span>}
         <br />
         <br />
         <button type="submit">Submit</button>
