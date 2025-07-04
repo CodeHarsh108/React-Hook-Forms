@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 
 function Apptwo() {
     const {register, handleSubmit, reset, watch, formState: {errors}} = useForm();
-    const onSubmit = (data) =>{ console.log(data); reset();}
+    const onSubmit = (data) =>{ console.log(data);}
     const watchedName = watch('name');
     const watchedEmail = watch('email');
 
@@ -34,6 +34,7 @@ function Apptwo() {
         <br />
         <br />
         <button type="submit">Submit</button>
+        <button type="button" onClick={() => reset()}>Reset</button>
       </form>
     </div>
   );
