@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './App.css';
-import { useForm } from 'react-hook-form';
+import { set, useForm } from 'react-hook-form';
 
 function Apptwo() {
   const {
@@ -32,6 +32,12 @@ function Apptwo() {
     }
   }, [watchedEmail]);
 
+  const existUsernames = ['admin', 'user123', 'user2'];
+  const checkIfUsernameExist = async (username) => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    return existUsernames.includes(username);
+  };
+
   return (
     <div>
       <h1>Forms in React</h1>
@@ -40,14 +46,13 @@ function Apptwo() {
           Name:
           <input
             {...register('name', {
-              validate: (value) => {
-                if (!value) {
-                  return 'Name is required';
+              required: 'Name is required',
+              validate: {
+                notAdmin : (value) => value !== 'admin' || 'Name cannot be admin',
+                checkUsername : async (value) => {
+                  const exist = await checkIfUsernameExist(value);
+                  return !exist || 'Username already exists';
                 }
-                if (value.length < 3) {
-                  return 'Name must be at least 3 characters long';
-                }
-                return true;
               }
             })}
           />
