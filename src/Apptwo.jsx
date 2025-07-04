@@ -18,12 +18,7 @@ function Apptwo() {
   const watchedName = watch('name');
   const watchedEmail = watch('email');
 
-  const validateName = (value) => {
-    if (!value) return 'Name is required';
-    if (value.length < 2) return 'Name must be at least 2 characters long';
-    if (value !== 'admin') return 'Only admins can submit this form';
-    return true;
-  };
+
 
   useEffect(() => {
     if (watchedName !== undefined) {
@@ -45,7 +40,15 @@ function Apptwo() {
           Name:
           <input
             {...register('name', {
-              validate: validateName
+              validate: (value) => {
+                if (!value) {
+                  return 'Name is required';
+                }
+                if (value.length < 3) {
+                  return 'Name must be at least 3 characters long';
+                }
+                return true;
+              }
             })}
           />
         </label>
