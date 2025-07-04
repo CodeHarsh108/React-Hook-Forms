@@ -3,8 +3,8 @@ import './App.css';
 import { useForm } from 'react-hook-form';
 
 function Apptwo() {
-    const {register, handleSubmit, watch, formState: {errors}} = useForm();
-    const onSubmit = (data) => console.log(data);
+    const {register, handleSubmit, reset, watch, formState: {errors}} = useForm();
+    const onSubmit = (data) =>{ console.log(data); reset();}
     const watchedName = watch('name');
     const watchedEmail = watch('email');
 
